@@ -15,7 +15,6 @@ import styles from './style.module.scss';
 const legendDate = [
   { label: 'Public holiday', style: styles.green },
   { label: 'Folk holiday', style: styles.red },
-  { label: 'Public and folk holidays', style: styles.gradient },
   { label: 'Weekend', style: styles.blue },
   { label: 'Working day', style: styles.white },
 ];

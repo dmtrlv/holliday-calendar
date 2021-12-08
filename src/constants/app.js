@@ -39,6 +39,6 @@ export const DAY_TYPES = {
 };
 
 export const INITIAL_CALENDAR_DATA = {
-  date: 1550966400000,
+  date: new Date().getTime(),
   day: DAYS[0],
 };
