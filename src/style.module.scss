@@ -1,0 +1,17 @@
+.wrapper {
+  max-width: 100%;
+  width: inherit;
+  margin: 24px 0;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @media screen and (max-width: 767.98px) {
+    max-width: 100%;
+    width: inherit;
+    margin: 0;
+    padding: 0 24px;
+  }
+}

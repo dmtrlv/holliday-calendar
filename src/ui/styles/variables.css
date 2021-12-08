@@ -1,0 +1,10 @@
+:root {
+  --colorPurple1000: #8f00ff;
+  --colorPurple100: #f8efff;
+  --colorBlue1000: #00ffff;
+  --colorBlue100: #e3f7f7;
+  --colorGreen1000: #7fff00;
+  --colorGreen100: #f3ffe7;
+  --colorBlack900: #181c1f;
+  --defaultGradient: linear-gradient(45deg, rgba(243,255,231,1) 50%, rgba(248,239,255,1) 50%);
+}

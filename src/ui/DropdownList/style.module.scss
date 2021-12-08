@@ -1,0 +1,42 @@
+.contentWrapper {
+  position: absolute;
+  margin: 2px 0 0 0;
+  left: 0;
+  z-index: 1;
+  background: white;
+  border-radius: 8px;
+  padding: 14px 8px;
+  box-shadow: 1px 4px 4px rgb(0 0 0 / 25%);
+
+  @media (max-width: 767.98px) {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    box-sizing: border-box;
+  }
+}
+
+.content {
+  list-style: none;
+}
+
+.item {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--colorBlue100);
+  }
+
+  &.active {
+    cursor: default;
+    background: var(--colorGreen100);
+  }
+}
+

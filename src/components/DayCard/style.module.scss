@@ -1,0 +1,136 @@
+.flipCard {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  min-width: 180px;
+  perspective: 1000px;
+  position: relative;
+  margin: 0 12px;
+  cursor: default;
+
+  &.withHover {
+    &:hover {
+      .innerCard {
+        transform: rotateY(180deg);
+      }
+    }
+  }
+
+  &:first-child {
+    margin: 0 12px 0 0;
+  }
+
+  &:last-child {
+    margin: 0 0 0 12px;
+  }
+}
+
+.innerCard {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background:transparent;
+  border-radius: 8px;
+}
+
+.flipFront, .flipBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 8px;
+
+  &.white {
+    background: white;
+  }
+
+  &.green {
+    background: var(--colorGreen100);
+  }
+
+  &.blue {
+    background: var(--colorBlue100);
+  }
+
+  &.red {
+    background: var(--colorPurple100);
+  }
+
+  &.gradient {
+    background: var(--defaultGradient);
+  }
+}
+
+.flipFront {
+  color: black;
+}
+
+.flipBack {
+  transform: rotateY(180deg);
+}
+
+.content {
+  padding: 16px 14px;
+}
+
+.cardTitle {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--colorBlack900);
+  text-transform: capitalize;
+}
+
+.date {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--colorBlack900);
+  margin: 4px 0 0 0;
+}
+
+.holidaysBlock {
+  display: flex;
+  flex-direction: column;
+  margin: 14px 0 0 0;
+}
+
+.holiday {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  margin: 0 0 8px 0;
+
+  span {
+    max-width: 160px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+
+.holidayName {
+  color: var(--colorBlack900);
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.desc {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 4px 0 0 0;
+}
+
+
+.emojiRow {
+  position: absolute;
+  bottom: 16px;
+}

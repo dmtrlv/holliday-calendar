@@ -1,0 +1,19 @@
+.emojiWrapper{
+  display: flex;
+
+  & > span {
+    margin: 0 2px;
+
+    &:first-child {
+      margin: 0 2px 0 0;
+    }
+
+    &:last-child {
+      margin: 0 0 0 2px;
+    }
+  }
+}
+
+.emoji {
+  font-size: 24px;
+}
