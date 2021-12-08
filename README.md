@@ -3,6 +3,8 @@
 ## Installation
 Run `npm install` or `npm i`
 
+Rename .env.example file to .env
+
 ## Available Scripts
 
 In the project directory, you can run:
