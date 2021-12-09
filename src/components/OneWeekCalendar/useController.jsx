@@ -9,7 +9,7 @@ import useSmartSelector from '../../customHooks/useSmartSelector';
 import { setHolidayData } from '../../actions/app';
 
 // HF
-import { convertDateToTimestamp, formatDateFromTimestampForCalendar } from '../../helpers/formatDate';
+import { formatDateFromTimestampForCalendar } from '../../helpers/formatDate';
 
 // Constants
 import {
@@ -52,7 +52,12 @@ const useController = () => {
   // Generate data for every 7 days
   const weekData = useMemo(() => {
     const weekNewData = [];
-    if (alreadyRequestedData && !forceUpdate) {
+    const canCreateWeekData = alreadyRequestedData
+      && Object.values(alreadyRequestedData).length
+      && !forceUpdate
+      && !formattedStartDate.startsWith('NaN');
+
+    if (canCreateWeekData) {
       Object.values(DAYS).forEach((item, id) => {
         const date = Number(startDate) + (Number(ONE_DAY_TIMESTAMP) * Number(id));
         const dateInCalendarFormat = formatDateFromTimestampForCalendar(date);
@@ -71,10 +76,9 @@ const useController = () => {
   }, [alreadyRequestedData, startDate]);
 
   const onChangeStartDate = (newDate) => {
-    const newDateInTimestamp = convertDateToTimestamp(newDate);
-    const newDayIndex = new Date(newDateInTimestamp).getDay();
+    const newDayIndex = new Date(newDate).getDay();
     const newDay = DAYS[newDayIndex];
-    setStartDate(newDateInTimestamp);
+    setStartDate(newDate);
     setStartDay(newDay);
   };
 
@@ -86,9 +90,10 @@ const useController = () => {
 
   const setToday = () => {
     const todayDate = new Date().getTime();
-    const todayDay = new Date().getDay();
+    const todayDayIndex = new Date().getDay();
+    const newDay = DAYS[todayDayIndex];
     setStartDate(todayDate);
-    setStartDay(todayDay);
+    setStartDay(newDay);
   };
 
   const weekSwipe = (type) => {
@@ -102,7 +107,7 @@ const useController = () => {
   };
 
   const state = {
-    formattedStartDate,
+    startDate,
     startDay,
     weekData,
     daySelectorList,

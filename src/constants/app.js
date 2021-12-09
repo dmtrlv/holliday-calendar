@@ -40,5 +40,5 @@ export const DAY_TYPES = {
 
 export const INITIAL_CALENDAR_DATA = {
   date: new Date().getTime(),
-  day: DAYS[0],
+  day: DAYS[new Date().getDay()],
 };

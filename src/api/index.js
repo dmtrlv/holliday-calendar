@@ -19,12 +19,12 @@ export default {
       });
 
       if (data.data.error) {
-        return null;
+        return { holidays: null };
       }
 
       return data.data;
     } catch (err) {
-      return null;
+      return { holidays: null };
     }
   },
 };

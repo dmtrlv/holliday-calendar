@@ -1,6 +1,7 @@
 // Base
 import React from 'react';
 import cx from 'classnames';
+import DatePicker from 'react-datepicker';
 
 // Custom hooks
 import useController from './useController';
@@ -8,9 +9,12 @@ import useController from './useController';
 // Components
 import DaySelector from '../DaySelector';
 import DayCard from '../DayCard';
+import Button from '../../ui/Button';
 
 // Styles
 import styles from './style.module.scss';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const legendDate = [
   { label: 'Public holiday', style: styles.green },
@@ -29,7 +33,7 @@ const OneWeekCalendar = () => {
   } = useController();
 
   const {
-    formattedStartDate,
+    startDate,
     startDay,
     daySelectorList,
     weekData,
@@ -44,11 +48,10 @@ const OneWeekCalendar = () => {
         {/* Date control */}
         <div className={cx(styles.flexBlock, styles.withoutMobile)}>
           <p className={styles.text}>Select date</p>
-          <input
+          <DatePicker
             className={styles.input}
-            type="date"
-            value={formattedStartDate}
-            onChange={(e) => onChangeStartDate(e.target.value)}
+            selected={startDate}
+            onChange={(date) => onChangeStartDate(date)}
           />
         </div>
 
@@ -65,31 +68,29 @@ const OneWeekCalendar = () => {
 
         {/* Weeks control control */}
         <div className={styles.flexBlock}>
-          <button className={styles.controlButton} type="button" onClick={() => weekSwipe('prev')}>
-            <span>Prev week</span>
-          </button>
-          <button className={styles.controlButton} type="button" onClick={setToday}>
-            <span>Today</span>
-          </button>
-          <button className={styles.controlButton} type="button" onClick={() => weekSwipe('next')}>
-            <span>Next week</span>
-          </button>
+          <Button className={styles.controlButton} btnText="Prev week" onClick={() => weekSwipe('prev')} />
+          <Button className={styles.controlButton} btnText="Today" onClick={setToday} />
+          <Button className={styles.controlButton} btnText="Next week" onClick={() => weekSwipe('next')} />
         </div>
       </div>
 
       {/* Day cards part */}
       <div className={styles.cardsWrapper}>
-        {!weekData.length ? null : weekData.map((item) => {
-          return (
-            <DayCard
-              onClick={() => onChangeStartDate(item.date)}
-              title={item.day}
-              date={item.date}
-              holidays={item.holidays}
-              dayType={item.dayType}
-            />
-          );
-        })}
+        {!weekData.length
+          ? (
+            <div className={styles.loader} />
+          )
+          : weekData.map((item) => {
+            return (
+              <DayCard
+                onClick={() => onChangeStartDate(item.date)}
+                title={item.day}
+                date={item.date}
+                holidays={item.holidays}
+                dayType={item.dayType}
+              />
+            );
+          })}
         <div className={styles.blur}/>
       </div>
 

@@ -17,27 +17,29 @@ import { getHolidayType } from '../helpers/getHolidayType';
 export const setHolidayData = (
   { formattedStartDate, formattedEndDate, timestampStartDate },
 ) => async (dispatch) => {
-  const { holidays: holidaysData } = await api.getHolidays(
+  const { holidays: holidaysData = {} } = await api.getHolidays(
     { startDate: formattedStartDate, endDate: formattedEndDate },
   );
+
   const newReqData = {};
+  if (holidaysData && Object.keys(holidaysData).length) {
+    for (let i = 0; i < 30; i += 1) {
+      const date = Number(timestampStartDate) + (Number(ONE_DAY_TIMESTAMP) * Number(i));
+      const dateInCalendarFormat = formatDateFromTimestampForCalendar(date);
+      const holidays = holidaysData[dateInCalendarFormat];
+      const dayId = new Date(date).getDay();
+      const day = DAYS[dayId];
+      const dayType = getHolidayType(holidays, day);
+      const newDataItem = {
+        date: dateInCalendarFormat,
+        dateInTimestamp: date,
+        day,
+        holidays,
+        dayType,
+      };
 
-  for (let i = 0; i < 30; i += 1) {
-    const date = Number(timestampStartDate) + (Number(ONE_DAY_TIMESTAMP) * Number(i));
-    const dateInCalendarFormat = formatDateFromTimestampForCalendar(date);
-    const holidays = holidaysData[dateInCalendarFormat];
-    const dayId = new Date(date).getDay();
-    const day = DAYS[dayId];
-    const dayType = getHolidayType(holidays, day);
-    const newDataItem = {
-      date: dateInCalendarFormat,
-      dateInTimestamp: date,
-      day,
-      holidays,
-      dayType,
-    };
-
-    newReqData[dateInCalendarFormat] = newDataItem;
+      newReqData[dateInCalendarFormat] = newDataItem;
+    }
   }
 
   dispatch({
